@@ -36,7 +36,16 @@ defmodule Exauth.Accounts do
 
   """
   def get_user!(id), do: Repo.get!(User, id)
+  def get_user_by_username(uname) do
+    from(
+      u in User,
+      where: u.username == ^uname
+    )
+    |> Repo.one()
 
+  end
+  @spec create_user(:invalid | %{optional(:__struct__) => none, optional(atom | binary) => any}) ::
+          any
   @doc """
   Creates a user.
 
